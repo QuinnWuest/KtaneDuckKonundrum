@@ -76,7 +76,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         "Teddy", "Amelia", "Sasha", "Enrique", "Oscar", "Cthulu", // names of the ducks in the fifth Duck Konundrum, The Amazing Juggling Troupe of Duckkon Undrum V (and also Cthulu)
         "Dude", "Emerald", "Jordan", "Milton", "Pauletta", // names of the chefs in the sixty Duck Konundrum, The Duck Konundrum VI: Now with Way Way Way Way Way Too Much Pepper
         "Economist", "Linguist", "Chemist", "Al Capone", "Tartuffe", "Cookie Monster", "Blastoid", "Algernon", "Scotchy", // names of the puzzle solvers in the eighth Duck Konundrum, DK8: The Turducken Konundrum
-        "Bagels", "Grunkle", "Steven", "Harold", "Clam Chowder", "Quackers", "Duckworth", "Quedlington", "Billiam", "Crouch", "Craig", "Goosetav", "Drew", "Fuck", "Shithead", "Henry", "Glen", "Waz",
+        "Bagels", "Grunkle", "Steven", "Harold", "Clam Chowder", "Quackers", "Duckworth", "Quedlington", "Billiam", "Crouch", "Craig", "Goosetav", "Drew", "Henry", "Glen", "Waz",
         "Gorby", "Toodles", "Peabeater", "Xanderoth", "Mario", "Clorco", "Dicey", "Alex", "Duck Norris", "Jimothy", "Webster", "Dolan", "Jon", "JonJon", "Eric", "Cabebe", "Junior", "Doctor", "Duckra",
         "Josh", "John Cena", "Username", "Obama", "Muck", "Weedeater", "Trollface", "Baln", "Blan", "Tom Brady", "Void", "Cooldoom", "Luna", "Millie", "Rose", "Flower", "Niels", "Matthew",
         "Phillip", "Bork", "Molasses", "Quack" }; // community-submitted names
@@ -100,7 +100,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     private int maxStep = 18; // used to block off the last case (hokey pokey) from being used once it's used, because it should only appear once
 
     private int questionNumber = 0;
-    private bool[] validQuestionSubjects = { true, true, false, false, false, false, false, false, false, false, false, false, true };
+    private bool[] validQuestionSubjects = { true, true, true, false, false, false, false, false, false, false, false, false, true };
     // possible question subjects are: 0 - your position / 1 - duck's position / 2 - sitting/standing/handstand / 3 - seat colors / 4 - bottom colors / 5 - back numbers/colors
     //                                 6 - watering can contents / 7 - watering can colors / 8 - body part colors / 9 - duck name / 10 - whoopee cushion position / 11 - Ls on forehead / 12 - compare two seats
     private int[] questionSubjects = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
@@ -1628,7 +1628,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             {
                 Audio.PlaySoundAtTransform("glitch" + Random.Range(1, 12).ToString(), Module.transform);
                 Module.HandleStrike();
-                DebugMsg("You pressed " + btnTexts[btnNumber] + ". That was not correct.");
+                DebugMsg("You pressed " + btnTexts[btnNumber].text + ". That was not correct.");
                 while (btnTexts[btnNumber].text != "")
                     btnTexts[btnNumber].text = btnTexts[btnNumber].text.Substring(0, btnTexts[btnNumber].text.Length - 1);
             }
@@ -1710,7 +1710,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                     seat1 = GenerateSeat(2) % 6;
                     if (Random.Range(0, 4) == 0) // if 25% chance goes through, ask about whether or not a seat is painted instead
                     {
-                        if (Random.Range(0, 2) == 0) // seat is painted
+                        if (Random.Range(0, 2) == 0 || !seatColors.Contains(0)) // seat is painted
                         {
                             while (seatColors[seat1] == 0)
                                 seat1 = GenerateSeat(2) % 6;
@@ -1749,7 +1749,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                     seat1 = GenerateSeat(3) % 6;
                     if (Random.Range(0, 4) == 0) // if 25% chance goes through, ask about whether or not a bottom is painted instead
                     {
-                        if (Random.Range(0, 2) == 0) // bottom is painted
+                        if (Random.Range(0, 2) == 0 || !bottomColors.Contains(0)) // bottom is painted
                         {
                             while (bottomColors[seat1] == 0)
                                 seat1 = GenerateSeat(3) % 6;
@@ -1788,7 +1788,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                     seat1 = GenerateSeat(420) % 6;
                     if (Random.Range(0, 4) == 0) // if 25% chance goes through, ask about whether or not a chair has a number instead
                     {
-                        if (Random.Range(0, 2) == 0) // chair has a number
+                        if (Random.Range(0, 2) == 0 || !backColors.Contains(0)) // chair has a number
                         {
                             Debug.LogFormat("chair has a number.");
                             while (backColors[seat1] == 0)
@@ -2090,7 +2090,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             yield return new WaitForSeconds(.01f);
         }
 
-        if (seatColors.Count(a => a.Equals(0)) < 6)
+        if (seatColors.Count(a => a.Equals(0)) < 6) 
             validQuestionSubjects[3] = true;
         if (bottomColors.Count(a => a.Equals(0)) < 6)
             validQuestionSubjects[4] = true;
@@ -2100,7 +2100,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             validQuestionSubjects[6] = true;
         if (wateringCanColors.Count(a => a.Equals(0)) < 3)
             validQuestionSubjects[7] = true;
-        if (bodyPartColors.Count(a => a.Equals(0)) < 3)
+        if (bodyPartColors.Count(a => a.Equals(0)) < 5)
             validQuestionSubjects[8] = true;
         if (duckName != "")
             validQuestionSubjects[9] = true;
