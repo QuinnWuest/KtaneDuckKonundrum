@@ -133,40 +133,59 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     void Init()
     {
         if (ignoredModules == null)
-            ignoredModules = BossModule.GetIgnoredModules("Duck Konundrum", new string[]{
+            ignoredModules = GetComponent<KMBossModule>().GetIgnoredModules("Duck Konundrum", new string[] {
                 "14",
+                "42",
+                "501",
                 "A>N<D",
                 "Bamboozling Time Keeper",
+                "Black Arrows",
                 "Brainf---",
+                "The Board Walk",
                 "Busy Beaver",
+                "Don't Touch Anything",
                 "Duck Konundrum",
-                "Everything",
+                "Floor Lights",
+                "Forget Any Color",
                 "Forget Enigma",
+                "Forget Ligma",
                 "Forget Everything",
+                "Forget Infinity",
                 "Forget It Not",
+                "Forget Maze Not",
                 "Forget Me Later",
                 "Forget Me Not",
                 "Forget Perspective",
+                "Forget The Colors",
                 "Forget Them All",
                 "Forget This",
                 "Forget Us Not",
                 "Iconic",
+                "Keypad Directionality",
                 "Kugelblitz",
-                "OmegaForget",
+                "Multitask",
+                "OmegaDestroyer",
+                "OmegaForest",
                 "Organization",
+                "Password Destroyer",
+                "Purgatory",
                 "RPS Judging",
+                "Security Council",
+                "Shoddy Chess",
                 "Simon Forgets",
                 "Simon's Stages",
                 "Souvenir",
+                "Speech Jammer",
                 "Tallordered Keys",
                 "The Time Keeper",
                 "Timing is Everything",
                 "The Troll",
-                "The Twin",
                 "Turn The Key",
+                "The Twin",
                 "Übermodule",
-                "Ültimate Custom Night",
-                "The Very Annoying Button"
+                "Ultimate Custom Night",
+                "The Very Annoying Button",
+                "Whiteout"
             });
 
         stageCount = Bomb.GetSolvableModuleNames().Where(a => !ignoredModules.Contains(a)).ToList().Count;
@@ -597,7 +616,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                                 oh = Random.Range(0, 2);
                                 if (uh == 3)
                                     stageText += "move the duck to the chair across from it.";
-                                if (oh == 0)
+                                else if (oh == 0)
                                     stageText += "move the duck " + uh + " chair(s) counter-clockwise.";
                                 else
                                     stageText += "move the duck " + uh + " chair(s) clockwise.";
@@ -683,7 +702,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                                 oh = Random.Range(0, 2);
                                 if (uh == 3)
                                     stageText += "move the duck to the chair across from it instead.";
-                                if (oh == 0)
+                                else if (oh == 0)
                                     stageText += "move the duck " + uh + " chair(s) counter-clockwise instead.";
                                 else
                                     stageText += "move the duck " + uh + " chair(s) clockwise instead.";
