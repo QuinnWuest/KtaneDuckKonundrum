@@ -28,7 +28,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     private int currentStage = 0, queuedStages = 0, displayedStage = -1;
     private string stageText;
 
-    private bool animationPlaying = false, questionsAreDisplayed = false, readyToStartSubmission = false;
+    private bool animationPlaying = false, readyToStartSubmission = false;
     
     private int currentPos, duckPos;
     private int chairMethod;
@@ -2099,7 +2099,6 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         while (animationPlaying || currentStage + 1 <= stageCount)
             yield return new WaitForSeconds(.1f);
         animationPlaying = true;
-        questionsAreDisplayed = true;
         Audio.PlaySoundAtTransform("glitch" + Random.Range(1, 12).ToString(), Module.transform);
         btnTexts[0].text = btnTexts[1].text = btnTexts[2].text = btnTexts[3].text = "";
 
@@ -2309,22 +2308,17 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     {
         string[] numbers = { "1", "2", "3", "4" };
         cmd = cmd.ToLowerInvariant();
-        if (!questionsAreDisplayed)
-        {
-            yield return "sendtochaterror Duck Konundrum is not ready for submission yet!";
-            yield break;
-        }
         if (cmd.StartsWith("press "))
         {
             cmd = cmd.Substring(6);
             if (numbers.Contains(cmd))
                 PressButton(Array.IndexOf(numbers, cmd));
             else
-                yield return "sendtochaterror That's not a number 1-4.";
+                yield return "sendtochaterror Quack quack! Quack, quack. (That's not a number 1-4.)";
             yield break;
         }
         
-        yield return "sendtochaterror W-what?";
+        yield return "sendtochaterror Quack quack quack! (That doesn't follow the format...)";
         yield break;
     }
 }
