@@ -28,7 +28,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     private int currentStage = 0, queuedStages = 0, displayedStage = -1;
     private string stageText;
 
-    private bool animationPlaying = false, readyToStartSubmission = false;
+    private bool animationPlaying = false, readyToStartSubmission = false, autosolveWeirdness = false, stopAutosolve = false;
     
     private int currentPos, duckPos;
     private int chairMethod;
@@ -1663,7 +1663,10 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         for (int i = 0; i < 4; i++)
             btnTexts[i].text = "";
         if (questionNumber > 2)
+        {
+            stopAutosolve = true;
             StartCoroutine(SolveAnimation());
+        }
         else
         {
             while (!validQuestionSubjects[questionSubjects[subjectIndex]])
@@ -2092,12 +2095,14 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     }
     IEnumerator PrepForSubmission()
     {
+        autosolveWeirdness = true;
         if (displayedStage >= stageCount)
             yield return null;
         Debug.LogFormat("bluh");
         readyForInput = true;
         while (animationPlaying || currentStage + 1 <= stageCount)
             yield return new WaitForSeconds(.1f);
+        autosolveWeirdness = false;
         animationPlaying = true;
         Audio.PlaySoundAtTransform("glitch" + Random.Range(1, 12).ToString(), Module.transform);
         btnTexts[0].text = btnTexts[1].text = btnTexts[2].text = btnTexts[3].text = "";
@@ -2312,7 +2317,10 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         {
             cmd = cmd.Substring(6);
             if (numbers.Contains(cmd))
+            {
+                yield return null;
                 PressButton(Array.IndexOf(numbers, cmd));
+            }
             else
                 yield return "sendtochaterror Quack quack! Quack, quack. (That's not a number 1-4.)";
             yield break;
@@ -2320,5 +2328,21 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         
         yield return "sendtochaterror Quack quack quack! (That doesn't follow the format...)";
         yield break;
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        if (!readyForInput)
+        {
+            while (!readyToStartSubmission) yield return true;
+            PressButton(Random.Range(0, 4));
+        }
+        while (autosolveWeirdness) yield return true;
+        while (!stopAutosolve)
+        {
+            while (animationPlaying) yield return true;
+            PressButton(correctAnswer);
+        }
+        while (!solved) yield return true;
     }
 }
