@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Name: ModConfig
   m_EditorClassIdentifier: 
   id: duckKonundrum
-  title: Duck Konundrum
+  title: Duck Konundrum [REUPLOAD]
   author: EpicToast
   description: "The \"defuser with a manual\" module to end all \"defuser with a manual\"
-    modules.\r\n\r\nBased on the MIT Mystery Hunt puzzle Duck Konundrum by Dan Katz.\n\nMod
-    Id: duckKonundrum\nManual: https://ktane.timwi.de/HTML/Duck%20Konundrum.html"
+    modules.\r\n\r\nBased on the MIT Mystery Hunt puzzle Duck Konundrum by Dan Katz.\n\nThis
+    is a reupload of EpicToast's module with changes and bug fixes. Unsubscribe from
+    the old version here:\r\nhttps://steamcommunity.com/sharedfiles/filedetails/?id=2570573910\n\n[url=https://ktane.timwi.de/HTML/Duck%20Konundrum.html]Manual
+    HTML[/url]\r\n[url=https://ktane.timwi.de/PDF/Duck%20Konundrum.pdf]Manual PDF[/url]"
   version: v1.0
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 859fba2acb65d8942a68c7600969aa2e, type: 3}

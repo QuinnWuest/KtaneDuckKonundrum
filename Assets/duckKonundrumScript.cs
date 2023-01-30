@@ -1153,7 +1153,10 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                                     if (backColors.Count(a => a.Equals(backColors[uhhhhhhhhhhh])) == 1)
                                         numberString = "N (where N is the only number written on the back of a chair in " + possibleColors[backColors[uhhhhhhhhhhh]] + ") ";
                                     else
+                                    {
                                         numberValue = Random.Range(1, 6);
+                                        numberString = numberValue.ToString();
+                                    }
                                     break;
                             }
                             return backNumbers[uhhhhhhhhhhh];
@@ -2060,7 +2063,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         if (queuedStages == 0)
             btnTexts[2].text = btnTexts[3].text = "";
         string line = "";
-        DebugMsg("Displying Stage " + displayedStage + ". It says: " + textToDisplay);
+        DebugMsg("Displaying Stage " + displayedStage + ". It says: " + textToDisplay);
 
         if (displayedStage >= stageCount)
             readyToStartSubmission = true;
@@ -2319,7 +2322,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             if (numbers.Contains(cmd))
             {
                 yield return null;
-                PressButton(Array.IndexOf(numbers, cmd));
+                btnSelectables[Array.IndexOf(numbers, cmd)].OnInteract();
             }
             else
                 yield return "sendtochaterror Quack quack! Quack, quack. (That's not a number 1-4.)";
@@ -2335,13 +2338,13 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         if (!readyForInput)
         {
             while (!readyToStartSubmission) yield return true;
-            PressButton(Random.Range(0, 4));
+            btnSelectables[Random.Range(0, 4)].OnInteract();
         }
         while (autosolveWeirdness) yield return true;
         while (!stopAutosolve)
         {
             while (animationPlaying) yield return true;
-            PressButton(correctAnswer);
+            btnSelectables[correctAnswer].OnInteract();
         }
         while (!solved) yield return true;
     }
