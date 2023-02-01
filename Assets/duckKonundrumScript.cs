@@ -32,13 +32,13 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     
     private int currentPos, duckPos;
     private int chairMethod;
-    private int[] seatColors = { 0, 0, 0, 0, 0, 0 }; // 0 = unpainted, 1/2/3 = red/yellow/blue, 4/5/6 = orange/green/purple, 7 = brown
-    private int[] bottomColors = { 0, 0, 0, 0, 0, 0 };
-    private int[] backNumbers = { 0, 0, 0, 0, 0, 0 };
-    private int[] backColors = { 0, 0, 0, 0, 0, 0 };
-    private int[] wateringCanContents = { 0, 0, 0 }; // ordered from smallest to largest
-    private int[] wateringCanColors = { 0, 0, 0 };
-    private int[] bodyPartColors = { 0, 0, 0, 0, 0 }; // left foot/right foot/left hand/right hand/butt
+    private readonly int[] seatColors = { 0, 0, 0, 0, 0, 0 }; // 0 = unpainted, 1/2/3 = red/yellow/blue, 4/5/6 = orange/green/purple, 7 = brown
+    private readonly int[] bottomColors = { 0, 0, 0, 0, 0, 0 };
+    private readonly int[] backNumbers = { 0, 0, 0, 0, 0, 0 };
+    private readonly int[] backColors = { 0, 0, 0, 0, 0, 0 };
+    private readonly int[] wateringCanContents = { 0, 0, 0 }; // ordered from smallest to largest
+    private readonly int[] wateringCanColors = { 0, 0, 0 };
+    private readonly int[] bodyPartColors = { 0, 0, 0, 0, 0 }; // left foot/right foot/left hand/right hand/butt
     private int hokeyPokeyStep = -1; // step of the hokey pokey
     private int hokeyPokeyPart = 0; // body part of the hokey pokey
     private int hokeyPokeyRule = 0; // what happens while you do the hokey pokey
@@ -579,7 +579,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
 
                                 stageText = "Paint " + bodyPartString + " with " + colorString + ".";
                                 DebugMsg("Now " + bodyPartString + " is/are " + possibleColors[color1] + "-colored.");
-                                if (foreheadActivated && foreheadRule == 3)
+                                if (foreheadActivated && foreheadRule == 5)
                                 {
                                     foreheadLs++;
                                     DebugMsg("You paint another L on your forehead. There are now " + foreheadLs + " Ls on your forehead.");
