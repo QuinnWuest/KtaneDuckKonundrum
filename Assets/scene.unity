@@ -156,6 +156,10 @@ Prefab:
       propertyPath: m_Name
       value: ButtonMasherModule (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -201,6 +205,10 @@ Prefab:
     - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
       propertyPath: m_Name
       value: ButtonMasherModule (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
@@ -290,6 +298,10 @@ Prefab:
       propertyPath: m_Name
       value: ButtonMasherModule (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -335,6 +347,10 @@ Prefab:
     - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
       propertyPath: m_Name
       value: ButtonMasherModule (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
@@ -382,6 +398,10 @@ Prefab:
       propertyPath: m_Name
       value: ButtonMasherModule (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -428,6 +448,10 @@ Prefab:
       propertyPath: m_Name
       value: ButtonMasherModule (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -473,6 +497,10 @@ Prefab:
     - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
       propertyPath: m_Name
       value: ButtonMasherModule (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
@@ -601,6 +629,10 @@ Prefab:
       propertyPath: m_Name
       value: ButtonMasherModule (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -646,6 +678,10 @@ Prefab:
     - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
       propertyPath: m_Name
       value: ButtonMasherModule (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
@@ -805,6 +841,10 @@ Prefab:
       propertyPath: m_Name
       value: ButtonMasherModule (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
   m_IsPrefabParent: 0
@@ -850,6 +890,10 @@ Prefab:
     - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
       propertyPath: m_Name
       value: ButtonMasherModule (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
@@ -961,6 +1005,10 @@ Prefab:
     - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
       propertyPath: m_Name
       value: ButtonMasherModule (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 127088, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30c58dfe6604c9f45aba8b804a82bdf1, type: 2}

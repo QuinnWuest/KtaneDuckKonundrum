@@ -1316,12 +1316,12 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                             {
                                 if (placeholder == 0 && seatColors[(currentPos + i) % 6] == bluh)
                                 {
-                                    seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from you)";
+                                    seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from you, starting from and including your chair)";
                                     return (currentPos + i) % 6;
                                 }
                                 else if (placeholder == 1 && seatColors[(duckPos + i) % 6] == bluh)
                                 {
-                                    seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from the duck)";
+                                    seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from the duck, starting from and including the duck's chair)";
                                     return (duckPos + i) % 6;
                                 }
                             }
@@ -1346,12 +1346,12 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                             {
                                 if (placeholder == 0 && bottomColors[(currentPos + i) % 6] == bluh)
                                 {
-                                    seatString = "the chair whose bottom is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from you)";
+                                    seatString = "the chair whose bottom is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from you, starting from and including your chair)";
                                     return (currentPos + i) % 6;
                                 }
                                 else if (placeholder == 1 && bottomColors[(duckPos + i) % 6] == bluh)
                                 {
-                                    seatString = "the chair whose bottom is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from the duck)";
+                                    seatString = "the chair whose bottom is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from the duck, starting from and including the duck's chair)";
                                     return (duckPos + i) % 6;
                                 }
                             }
@@ -1990,17 +1990,18 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                 case 12: // compare two seats
                     int seat2 = GenerateSeat();
                     string seat2String = seatString;
-                    seat1 = GenerateSeat(seatNumberValue);
+                    var snv = seatNumberValue;
+                    seat1 = GenerateSeat(snv);
                     if (Random.Range(0, 2) == 0) // X is the same as Y
                     {
                         while (seat1 != seat2)
-                            seat1 = GenerateSeat(seatNumberValue);
+                            seat1 = GenerateSeat(snv);
                         correctAnswer = 0;
                     }
                     else // X is not the same as Y
                     {
                         while (seat1 == seat2)
-                            seat1 = GenerateSeat(seatNumberValue);
+                            seat1 = GenerateSeat(snv);
                         correctAnswer = 1;
                     }
                     stageText = "Is " + seatString + " the same as " + seat2String + "?";
