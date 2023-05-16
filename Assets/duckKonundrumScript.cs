@@ -5,7 +5,8 @@ using System.Linq;
 using KModkit;
 using Random = UnityEngine.Random;
 
-public class duckKonundrumScript : MonoBehaviour {  // this code is awful, continue at your own risk
+public class duckKonundrumScript : MonoBehaviour
+{  // this code is awful, continue at your own risk
 
     public KMBombModule Module;
     public KMBossModule BossModule;
@@ -29,7 +30,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     private string stageText;
 
     private bool animationPlaying = false, readyToStartSubmission = false, autosolveWeirdness = false, stopAutosolve = false;
-    
+
     private int currentPos, duckPos;
     private int chairMethod;
     private readonly int[] seatColors = { 0, 0, 0, 0, 0, 0 }; // 0 = unpainted, 1/2/3 = red/yellow/blue, 4/5/6 = orange/green/purple, 7 = brown
@@ -51,7 +52,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     private int foreheadLs = 0;
     private int foreheadRule = 0;
     private int foreheadColor = 0;
-    
+
     private static readonly string[] possibleColors = { "no", "red", "yellow", "blue", "orange", "green", "purple", "brown" };
     private static readonly string[] bodyParts = { "your right foot", "your left foot", "your right hand", "your left hand", "your butt cheeks", "both of your feet", "both of your hands", "the duck's feet" };
     private static readonly string[] sizes = { "smallest", "medium-sized", "largest" };
@@ -108,11 +109,12 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
     private int correctAnswer = 0;
     private int subjectIndex = 0;
 
-    void Start () {
+    void Start()
+    {
         _moduleId = _moduleIdCounter++;
         Module.OnActivate += Activate;
         Init();
-	}
+    }
 
     void Activate()
     {
@@ -211,7 +213,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             DebugMsg("Cannot generate stages; autosolving module.");
             StartCoroutine("SolveAnimation");
         }
-        
+
         screenText.text = "";
         StartCoroutine(PrepForStage(displayedStage));
         StartCoroutine(CheckForSolves());
@@ -240,7 +242,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                 stageText += "chair " + (currentPos - duckPos) + " chair(s) counter-clockwise from you.";
             StartCoroutine(DisplayStage(stageText));
             for (int i = 0; i < 3; i++)
-                btnTexts[i+1].text = "";
+                btnTexts[i + 1].text = "";
         }
 
         else if (displayedStage + 1 == stageCount)
@@ -400,7 +402,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                             DebugMsg("You paint another L on your forehead. There are now " + foreheadLs + " Ls on your forehead.");
                         }
                     }
-                    
+
                     DebugMsg("The " + sizes[can1] + " watering can is now filled with " + possibleColors[wateringCanContents[can1]] + " paint.");
                     break;
                 case 7: // Paint a watering can.
@@ -552,11 +554,9 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                                 DebugMsg("The duck's name is " + duckName + ".");
                                 break;
                             case 2: // remove vowels from the duck's name
-                                duckName = duckName.ToLowerInvariant();
-                                if (!duckName.Contains("a") && !duckName.Contains("e") && !duckName.Contains("i") && !duckName.Contains("o") && !duckName.Contains("u")) // there's probably a better way of doing this but uhhhhhh oh well
+                                var tempDuckName = duckName.Where(a => !"AEIOUaeiou".Contains(a)).Join("");
+                                if (tempDuckName == duckName)
                                     goto default;
-                                duckName = duckName.Replace("a", string.Empty).Replace("e", string.Empty).Replace("i", string.Empty).Replace("o", string.Empty).Replace("u", string.Empty);
-                                duckName = duckName.First().ToString().ToUpperInvariant() + duckName.Substring(1); // capitalize first letter
                                 stageText = "Remove all vowels from the duck's name as punishment. (Y is not considered to be a vowel.)";
                                 DebugMsg("The duck's name is " + duckName + ".");
                                 break;
@@ -666,7 +666,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                                 }
                                 break;
                         }
-                        
+
                         DebugMsg("The whoopee cushion is on the chair " + whoopeeCushionPos + " chair(s) clockwise from the armchair.");
                     }
                     else if (Random.Range(0, 2) == 0) // move the cushion
@@ -757,7 +757,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                                 stageText += "dip " + bodyParts[uh] + " in the " + sizes[oh] + " watering can to paint it with whatever paint is in that can (unless the can is empty, then nothing happens).";
                                 break;
                         }
-                        
+
                         DebugMsg("The whoopee cushion is on the chair " + whoopeeCushionPos + " chair(s) clockwise from the armchair.");
                     }
 
@@ -787,7 +787,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                             stageText = "Paint " + numberString + " Ls on your forehead, in the color that you're supposed to be painting them with.";
                         }
                     }
-                    
+
                     break;
                 default: // Hokey pokey!!!
                     hokeyPokeyActive = true;
@@ -977,7 +977,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                     }
                 Debug.LogFormat("debug message (hokey pokey). hokey pokey is happening. step is {0}. part is {1}.", hokeyPokeyStep, hokeyPokeyPart);
             }
-            
+
             StartCoroutine(DisplayStage(stageText));
         }
     }
@@ -1232,7 +1232,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                 }
                 break;
         }
-        
+
         if (ignoredRule1 == 5 || Random.Range(0, 4) == 0)
         {
             numberValue = Random.Range(0, 15);
@@ -1415,7 +1415,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             case 7: // the chair X chair(s) clockwise from the whoopee cushion
                 if (whoopeeCushionPos == 69)
                     goto case 0;
-                else if (number1 % 6== 0)
+                else if (number1 % 6 == 0)
                     seatString = "the chair with the whoopee cushion";
                 else if (number1 % 6 == 3)
                     seatString = "the chair across from the whoopee cushion";
@@ -1912,12 +1912,17 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                     {
                         stageText = "How many letters are in the duck's name?";
                         questionAnswers[correctAnswer] = duckName.Replace(" ", "").Length.ToString();
+                        for (int i = 1; i < 4; i++)
+                        {
+                            placeholder = Random.Range(3, 16);
+                            while (questionAnswers.Contains(placeholder.ToString()))
+                                placeholder = Random.Range(3, 16);
+                            questionAnswers[(correctAnswer + i) % 4] = placeholder.ToString();
+                        }
+                        break;
                     }
-                    else
-                    {
-                        stageText = "What is the duck's name?";
-                        questionAnswers[correctAnswer] = duckName;
-                    }
+                    stageText = "What is the duck's name?";
+                    questionAnswers[correctAnswer] = duckName;
                     if (duckNames.Contains(duckName)) // if the duck's name has not been edited yet
                     {
                         for (int i = 1; i < 4; i++)
@@ -1928,28 +1933,25 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                             questionAnswers[(correctAnswer + i) % 4] = duckNames[placeholder];
                         }
                     }
-                    else if (duckName.Length > 12) // if the question is how many letters are in the duck's name
-                    {
-                        for (int i = 1; i < 4; i++)
-                        {
-                            placeholder = Random.Range(3, 16);
-                            while (questionAnswers.Contains(placeholder.ToString()))
-                                placeholder = Random.Range(3, 16);
-                            questionAnswers[(correctAnswer + i) % 4] = placeholder.ToString();
-                        }
-                    }
-
                     else
                     {
-                        string[] uhhhhhhhhhhhhhhh = { originalDuckName, originalDuckName + " Jr", "Dr " + originalDuckName, "Dr " + originalDuckName + " Jr", originalDuckName.Replace("a", string.Empty).Replace("e", string.Empty).Replace("i", string.Empty).Replace("o", string.Empty).Replace("u", string.Empty), originalDuckName.Replace("a", string.Empty).Replace("e", string.Empty).Replace("i", string.Empty).Replace("o", string.Empty).Replace("u", string.Empty) + " Jr", "Dr " + originalDuckName.Replace("a", string.Empty).Replace("e", string.Empty).Replace("i", string.Empty).Replace("o", string.Empty).Replace("u", string.Empty), "Dr " + originalDuckName.Replace("a", string.Empty).Replace("e", string.Empty).Replace("i", string.Empty).Replace("o", string.Empty).Replace("u", string.Empty) + " Jr" };
-                        uhhhhhhhhhhhhhhh = uhhhhhhhhhhhhhhh.Shuffle().ToArray();
-                        int uhhhhhhhhhhhhhhhIndex = 0;
-
+                        string[] vars = new[] {
+                            originalDuckName,
+                            originalDuckName + " Jr",
+                            "Dr " + originalDuckName,
+                            "Dr " + originalDuckName + " Jr",
+                            originalDuckName.Where(a => !"AEIOUaeiou".Contains(a)).Join(""),
+                            originalDuckName.Where(a => !"AEIOUaeiou".Contains(a)).Join("") + " Jr",
+                            "Dr " + originalDuckName.Where(a => !"AEIOUaeiou".Contains(a)).Join(""),
+                            "Dr " + originalDuckName.Where(a => !"AEIOUaeiou".Contains(a)).Join("") + " Jr"
+                        }.Select(i => i.Substring(0, 1).ToUpperInvariant() + i.Substring(1)).ToArray();
+                        vars = vars.Shuffle().ToArray();
+                        int varsIx = 0;
                         for (int i = 1; i < 4; i++)
                         {
-                            while (questionAnswers.Contains(uhhhhhhhhhhhhhhh[uhhhhhhhhhhhhhhhIndex]) || uhhhhhhhhhhhhhhh[uhhhhhhhhhhhhhhhIndex].Length > 12)
-                                uhhhhhhhhhhhhhhhIndex++;
-                            questionAnswers[(correctAnswer + i) % 4] = uhhhhhhhhhhhhhhh[uhhhhhhhhhhhhhhhIndex].Substring(0, 1).ToUpperInvariant() + uhhhhhhhhhhhhhhh[uhhhhhhhhhhhhhhhIndex].Substring(1);
+                            while (questionAnswers.Contains(vars[varsIx]) || vars[varsIx].Length > 12)
+                                varsIx++;
+                            questionAnswers[(correctAnswer + i) % 4] = vars[varsIx];
                         }
                     }
                     break;
@@ -2064,15 +2066,18 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
         if (queuedStages == 0)
             btnTexts[2].text = btnTexts[3].text = "";
         string line = "";
-        DebugMsg("Displaying Stage " + displayedStage + ". It says: " + textToDisplay);
-
+        DebugMsg("Displaying Stage " + displayedStage + ". It says:");
+        DebugMsg("\"" + textToDisplay + "\"");
+        DebugMsg("===============================================");
         if (displayedStage >= stageCount)
             readyToStartSubmission = true;
 
+        var length = screenText.text.Length;
+        var waitTime = 1.5f;
         while (screenText.text != "")
         {
             screenText.text = screenText.text.Substring(0, screenText.text.Length - 1);
-            yield return new WaitForSeconds(.002f);
+            yield return new WaitForSeconds(waitTime / length);
         }
 
         for (int i = 0; i < textToDisplay.Length; i++)
@@ -2086,13 +2091,13 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                 line = line.Substring(line.LastIndexOf(' ') + 1);
                 screenText.text += "\n" + line;
             }
-            yield return new WaitForSeconds(.002f);
+            yield return new WaitForSeconds(waitTime / textToDisplay.Length);
         }
 
         btnTexts[0].text = "Stage " + displayedStage;
 
         yield return new WaitForSeconds(2);
-        
+
         // currentStage++;
         animationPlaying = false;
 
@@ -2117,7 +2122,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             yield return new WaitForSeconds(.01f);
         }
 
-        if (seatColors.Count(a => a.Equals(0)) < 6) 
+        if (seatColors.Count(a => a.Equals(0)) < 6)
             validQuestionSubjects[3] = true;
         if (bottomColors.Count(a => a.Equals(0)) < 6)
             validQuestionSubjects[4] = true;
@@ -2212,7 +2217,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
             if (Bomb.GetTime() < 5) // make sure the module solves if the bomb is going to blow up before the solve animation can go through
                 Module.HandlePass();
         }
-        
+
         btnRenderers[0].material.color = btnRenderers[1].material.color = btnRenderers[2].material.color = btnRenderers[3].material.color = colors[1];
         Module.HandlePass();
         screenText.text = "Poggers!";
@@ -2302,16 +2307,16 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
 
         yield return new WaitForSeconds(.1f);
     }
-    
+
 
     void DebugMsg(string message)
     {
         Debug.LogFormat("[Duck Konundrum #{0}] {1}", _moduleId, message);
     }
 
-    #pragma warning disable 414
+#pragma warning disable 414
     private readonly string TwitchHelpMessage = "Use !{0} press 1/2/3/4 to press the 1st/2nd/3rd/4th buttons respectively.";
-    #pragma warning disable 414
+#pragma warning disable 414
 
     IEnumerator ProcessTwitchCommand(string cmd)
     {
@@ -2329,7 +2334,7 @@ public class duckKonundrumScript : MonoBehaviour {  // this code is awful, conti
                 yield return "sendtochaterror Quack quack! Quack, quack. (That's not a number 1-4.)";
             yield break;
         }
-        
+
         yield return "sendtochaterror Quack quack quack! (That doesn't follow the format...)";
         yield break;
     }
