@@ -1024,7 +1024,7 @@ public class duckKonundrumScript : MonoBehaviour
                     currentPos = (currentPos + uh) % 6;
                 if (currentPos == whoopeeCushionPos)
                     SitOnWhoopeeCushion();
-                DebugMsg("The whoopee cushion rule activated! You are now in the chair " + currentPos + " chair(s) clockwise from the armchair.");
+                DebugMsg("The whoopee cushion rule activated! You are now in the chair " + (currentPos + 1) + " chair(s) clockwise from the armchair.");
                 if (foreheadActivated && foreheadRule == 0)
                 {
                     foreheadLs++;
