@@ -1317,12 +1317,12 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (placeholder == 0 && seatColors[(currentPos + i) % 6] == bluh)
                                 {
                                     seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from you, starting from and including your chair)";
-                                    return (currentPos + i) % 6;
+                                    return (currentPos + i + 1) % 6;
                                 }
                                 else if (placeholder == 1 && seatColors[(duckPos + i) % 6] == bluh)
                                 {
                                     seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from the duck, starting from and including the duck's chair)";
-                                    return (duckPos + i) % 6;
+                                    return (duckPos + i + 1) % 6;
                                 }
                             }
                         }
