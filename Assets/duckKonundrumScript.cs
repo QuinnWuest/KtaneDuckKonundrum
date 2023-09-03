@@ -557,6 +557,7 @@ public class duckKonundrumScript : MonoBehaviour
                                 var tempDuckName = duckName.Where(a => !"AEIOUaeiou".Contains(a)).Join("");
                                 if (tempDuckName == duckName)
                                     goto default;
+                                duckName = tempDuckName;
                                 stageText = "Remove all vowels from the duck's name as punishment. (Y is not considered to be a vowel.)";
                                 DebugMsg("The duck's name is " + duckName + ".");
                                 break;
@@ -1024,7 +1025,7 @@ public class duckKonundrumScript : MonoBehaviour
                     currentPos = (currentPos + uh) % 6;
                 if (currentPos == whoopeeCushionPos)
                     SitOnWhoopeeCushion();
-                DebugMsg("The whoopee cushion rule activated! You are now in the chair " + (currentPos + 1) + " chair(s) clockwise from the armchair.");
+                DebugMsg("The whoopee cushion rule activated! You are now in the chair " + currentPos + " chair(s) clockwise from the armchair.");
                 if (foreheadActivated && foreheadRule == 0)
                 {
                     foreheadLs++;
@@ -1317,12 +1318,12 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (placeholder == 0 && seatColors[(currentPos + i) % 6] == bluh)
                                 {
                                     seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from you, starting from and including your chair)";
-                                    return (currentPos + i + 1) % 6;
+                                    return (currentPos + i) % 6;
                                 }
                                 else if (placeholder == 1 && seatColors[(duckPos + i) % 6] == bluh)
                                 {
                                     seatString = "the chair whose seat is painted with " + possibleColors[bluh] + " paint (if there are multiple, use the first one clockwise from the duck, starting from and including the duck's chair)";
-                                    return (duckPos + i + 1) % 6;
+                                    return (duckPos + i) % 6;
                                 }
                             }
                         }
@@ -1332,7 +1333,7 @@ public class duckKonundrumScript : MonoBehaviour
             case 3: // the chair with a [color] bottom. if there are multiple, use the first one clockwise from you/the duck.
                 if (bottomColors.Count(a => a.Equals(0)) == 6 && ignoredRule != 1) // if all bottoms are unpainted, default to case 1.
                     goto case 1;
-                else if (seatColors.Count(a => a.Equals(0)) == 6)
+                else if (bottomColors.Count(a => a.Equals(0)) == 6)
                     goto case 0;
                 else
                 {
