@@ -87,7 +87,7 @@ public class duckKonundrumScript : MonoBehaviour
         "the first digit of the serial number", "the last digit of the serial number", "the greatest digit in the serial number", "the lowest digit in the serial number", "the sum of all digits in the serial number",
         "the number of digits in the serial number", "the number of letters in the serial number", "the total number of modules"
     };
-    private static int[] edgeworkNumbers = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    private int[] edgeworkNumbers = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private static readonly string[] possibleHokeyPokeyRules = { "you put your penis out", "you shake your penis all about", "you turn yourself around", "you put your penis in" }; // don't worry, "your penis" will be replaced with a body part, it's just a placeholder
     private static readonly string[] possibleHokeyPokeyParts = { "your right foot", "your left foot", "your right hand", "your left hand", "your butt", "either of your feet", "either of your hands", "any painted body part", "any body part" };
     private static readonly string[] possibleForeheadRules = { "you move to a different chair", "the duck moves to a different chair", "any watering can gets painted", "paint gets added to any watering can", "a chair's seat, bottom, or back gets painted", "your body parts get painted" };
@@ -112,12 +112,6 @@ public class duckKonundrumScript : MonoBehaviour
     void Start()
     {
         _moduleId = _moduleIdCounter++;
-        Module.OnActivate += Activate;
-        Init();
-    }
-
-    void Activate()
-    {
         for (int i = 0; i < 4; i++)
         {
             int j = i;
@@ -130,6 +124,7 @@ public class duckKonundrumScript : MonoBehaviour
                 return false;
             };
         }
+        Init();
     }
 
     void Init()
