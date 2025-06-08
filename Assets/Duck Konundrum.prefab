@@ -2349,12 +2349,12 @@ TextMesh:
   m_GameObject: {fileID: 1421296279983908}
   m_Text: 
   m_OffsetZ: 0
-  m_CharacterSize: 0.1
+  m_CharacterSize: 0.24
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 100
+  m_FontSize: 1
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 401ac0fb7577d8646ba9e9fbb5c1eb83, type: 3}
@@ -2780,6 +2780,7 @@ MonoBehaviour:
   - {fileID: 102779338172290730}
   - {fileID: 102086101272642824}
   screenText: {fileID: 102914083147118088}
+  screenTextRenderer: {fileID: 23106441135907810}
   LEDRenderers:
   - {fileID: 23559510146729750}
   - {fileID: 23255767994472464}
