@@ -111,7 +111,6 @@ public class duckKonundrumScript : MonoBehaviour
     private string[] questionAnswers = { "", "", "", "" };
     private int correctAnswer = 0;
     private int subjectIndex = 0;
-    private bool TwitchPlaysActive;
 
     void Start()
     {
@@ -246,10 +245,8 @@ public class duckKonundrumScript : MonoBehaviour
 
         else if (displayedStage + 1 == stageCount)
         {
-            stageText = "Press any button to enter submission mode.";
-            for (int i = 0; i < 3; i++)
-                btnTexts[i + 1].text = "";
-            StartCoroutine(DisplayStage(stageText));
+            StartCoroutine(PrepForSubmission());
+            readyToStartSubmission = false;
         }
 
         else
@@ -1627,13 +1624,7 @@ public class duckKonundrumScript : MonoBehaviour
 
     void PressButton(int btnNumber)
     {
-        if (readyToStartSubmission)
-        {
-            DebugMsg("Ready for input!");
-            StartCoroutine(PrepForSubmission());
-            readyToStartSubmission = false;
-        }
-        else if (!readyForInput)
+        if (!readyForInput)
             Module.HandleStrike();
         else if (!animationPlaying)
         {
@@ -2048,11 +2039,8 @@ public class duckKonundrumScript : MonoBehaviour
             while (animationPlaying)
             {
                 yield return new WaitForSeconds(.1f);
-                if (TwitchPlaysActive)
-                {
-                    btnTexts[2].text = "(" + queuedStages + " stage(s)";
-                    btnTexts[3].text = "are queued.)";
-                }
+                btnTexts[2].text = "(" + queuedStages + " stage(s)";
+                btnTexts[3].text = "are queued.)";
             }
 
             GenerateStage();
@@ -2063,11 +2051,8 @@ public class duckKonundrumScript : MonoBehaviour
         animationPlaying = true;
         displayedStage++;
         queuedStages--;
-        if (TwitchPlaysActive)
-        {
-            btnTexts[2].text = "(" + queuedStages + " stage(s)";
-            btnTexts[3].text = "are queued.)";
-        }
+        btnTexts[2].text = "(" + queuedStages + " stage(s)";
+        btnTexts[3].text = "are queued.)";
         btnTexts[0].text = "Loading...";
         if (queuedStages == 0)
             btnTexts[2].text = btnTexts[3].text = "";
@@ -2093,7 +2078,7 @@ public class duckKonundrumScript : MonoBehaviour
         }
 
         btnTexts[0].text = "Stage " + displayedStage;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.25f);
 
         // currentStage++;
         animationPlaying = false;
@@ -2150,26 +2135,22 @@ public class duckKonundrumScript : MonoBehaviour
     IEnumerator DisplayQuestion()
     {
         animationPlaying = true;
-        string line = "";
+
+        var waitTime = 1f;
+        var length = screenText.text.Length;
+
+        var textToDisplay = stageText;
 
         while (screenText.text != "")
         {
             screenText.text = screenText.text.Substring(0, screenText.text.Length - 1);
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(waitTime / length);
         }
-
-        for (int i = 0; i < stageText.Length; i++)
+        SetWordWrappedText(ref textToDisplay, screenText, screenTextRenderer);
+        for (int i = 0; i < textToDisplay.Length; i++)
         {
-            line += stageText[i];
-            screenText.text += stageText[i];
-
-            if (line.Length > 33 && !line.EndsWith(" "))
-            {
-                screenText.text = screenText.text.Substring(0, screenText.text.LastIndexOf(' '));
-                line = line.Substring(line.LastIndexOf(' ') + 1);
-                screenText.text += "\n" + line;
-            }
-            yield return new WaitForSeconds(.01f);
+            screenText.text += textToDisplay[i];
+            yield return new WaitForSeconds(waitTime / textToDisplay.Length);
         }
 
         btnTexts[0].text = "";
@@ -2199,7 +2180,8 @@ public class duckKonundrumScript : MonoBehaviour
         }
 
         DebugMsg("Module solved! Poggers!");
-        screenText.text = "SYSTEM OVERLOAD...";
+        screenText.text = "SYSTEM\nOVERLOAD...";
+        screenText.fontSize = 128;
         Audio.PlaySoundAtTransform("solveSound", Module.transform);
 
         for (int i = 0; i < 50; i++)
@@ -2533,7 +2515,7 @@ public class duckKonundrumScript : MonoBehaviour
         tm.transform.eulerAngles = new Vector3(90, 0, 0);
 
         var desiredWidth = 0.13f * transform.lossyScale.x;
-        var desiredHeight = 0.072f * transform.lossyScale.x;
+        var desiredHeight = 0.068f * transform.lossyScale.x;
         while (high - low > 1)
         {
             var mid = (low + high) / 2;
