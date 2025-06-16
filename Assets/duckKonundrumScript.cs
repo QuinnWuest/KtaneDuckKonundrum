@@ -2089,7 +2089,6 @@ public class duckKonundrumScript : MonoBehaviour
         autosolveWeirdness = true;
         if (displayedStage >= stageCount)
             yield return null;
-        Debug.LogFormat("bluh");
         readyForInput = true;
         while (animationPlaying || currentStage + 1 <= stageCount)
             yield return new WaitForSeconds(.1f);
@@ -2515,7 +2514,7 @@ public class duckKonundrumScript : MonoBehaviour
         tm.transform.eulerAngles = new Vector3(90, 0, 0);
 
         var desiredWidth = 0.13f * transform.lossyScale.x;
-        var desiredHeight = 0.068f * transform.lossyScale.x;
+        var desiredHeight = 0.072f * transform.lossyScale.x;
         while (high - low > 1)
         {
             var mid = (low + high) / 2;
@@ -2564,7 +2563,7 @@ public class duckKonundrumScript : MonoBehaviour
                     low = mid;
             }
         }
-        text = tm.text;
+        text = tm.text = wrappeds[low];
         tm.text = origText;
         tm.fontSize = low;
         tm.transform.rotation = origRotation;
