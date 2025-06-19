@@ -227,17 +227,17 @@ public class duckKonundrumScript : MonoBehaviour
             if (currentPos == 0)
                 stageText += "armchair. The duck should sit on the ";
             else
-                stageText += "chair " + currentPos + " chair(s) clockwise from the armchair. The duck should sit on the ";
+                stageText += "chair " + currentPos + " chair" + (currentPos == 1 ? "" : "s") + " clockwise from the armchair. The duck should sit on the ";
             if (duckPos == currentPos)
                 stageText += "same chair as you. Please hold the duck very carefully.";
             else if (duckPos == 0)
                 stageText += "armchair.";
             else if (Random.Range(0, 2) == 0)
-                stageText += "chair " + duckPos + " chair(s) clockwise from the armchair.";
+                stageText += "chair " + duckPos + " chair" + (duckPos == 1 ? "" : "s") + " clockwise from the armchair.";
             else if (duckPos - currentPos > 0)
-                stageText += "chair " + (duckPos - currentPos) + " chair(s) clockwise from you.";
+                stageText += "chair " + (duckPos - currentPos) + " chair" + (duckPos - currentPos == 1 ? "" : "s") + " clockwise from you.";
             else
-                stageText += "chair " + (currentPos - duckPos) + " chair(s) counter-clockwise from you.";
+                stageText += "chair " + (currentPos - duckPos) + " chair" + (currentPos - duckPos == 1 ? "" : "s") + " counter-clockwise from you.";
             StartCoroutine(DisplayStage(stageText));
             for (int i = 0; i < 3; i++)
                 btnTexts[i + 1].text = "";
@@ -272,7 +272,7 @@ public class duckKonundrumScript : MonoBehaviour
                         seat1 = GenerateSeat(4);
                     currentPos = seat1;
                     stageText = "Move to " + seatString + ".";
-                    DebugMsg("You are now in the chair " + currentPos + " chair(s) clockwise from the armchair.");
+                    DebugMsg("You are now in the chair " + currentPos + " chair" + (currentPos == 1 ? "" : "s") + " clockwise from the armchair.");
                     if (currentPos == whoopeeCushionPos)
                         SitOnWhoopeeCushion();
                     if (foreheadActivated && foreheadRule == 0)
@@ -289,7 +289,7 @@ public class duckKonundrumScript : MonoBehaviour
                     stageText = "Move the duck to " + seatString + ".";
                     if (Random.Range(0, 5) == 0)
                         stageText += " Please be careful with the duck.";
-                    DebugMsg("The duck is now in the chair " + duckPos + " chair(s) clockwise from the armchair.");
+                    DebugMsg("The duck is now in the chair " + duckPos + " chair" + (duckPos == 1 ? "" : "s") + " clockwise from the armchair.");
                     if (duckPos == whoopeeCushionPos)
                         SitOnWhoopeeCushion();
                     if (foreheadActivated && foreheadRule == 1)
@@ -454,7 +454,7 @@ public class duckKonundrumScript : MonoBehaviour
 
                     seatColors[seat1 % 6] = color1;
                     stageText = "Using " + colorString + ", paint the seat of " + seatString + ".";
-                    DebugMsg("The seat of the chair " + (seat1 % 6) + " chair(s) clockwise from the armchair is now " + possibleColors[color1] + "-colored.");
+                    DebugMsg("The seat of the chair " + (seat1 % 6) + " chair" + (seat1 % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[color1] + "-colored.");
                     if (foreheadActivated && foreheadRule == 4)
                     {
                         foreheadLs++;
@@ -472,7 +472,7 @@ public class duckKonundrumScript : MonoBehaviour
 
                     bottomColors[seat1 % 6] = color1;
                     stageText = "Using " + colorString + ", paint the bottom of " + seatString + ".";
-                    DebugMsg("The bottom of the chair " + (seat1 % 6) + " chair(s) clockwise from the armchair is now " + possibleColors[color1] + "-colored.");
+                    DebugMsg("The bottom of the chair " + (seat1 % 6) + " chair" + (seat1 % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[color1] + "-colored.");
                     if (foreheadActivated && foreheadRule == 4)
                     {
                         foreheadLs++;
@@ -493,7 +493,7 @@ public class duckKonundrumScript : MonoBehaviour
 
                     backNumbers[seat1 % 6] = number1;
                     backColors[seat1 % 6] = color1;
-                    DebugMsg("The back of the chair " + (seat1 % 6) + " chair(s) clockwise from the armchair now has a " + possibleColors[color1] + "-colored " + number1 + " on it.");
+                    DebugMsg("The back of the chair " + (seat1 % 6) + " chair" + (seat1 % 6 == 1 ? "" : "s") + " clockwise from the armchair now has a " + possibleColors[color1] + "-colored " + number1 + " on it.");
                     if (foreheadActivated && foreheadRule == 4)
                     {
                         foreheadLs++;
@@ -604,9 +604,9 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (uh == 3)
                                     stageText += "move to the chair across from you.";
                                 else if (oh == 0)
-                                    stageText += "move " + uh + " chair(s) counter-clockwise.";
+                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + "counter-clockwise.";
                                 else
-                                    stageText += "move " + uh + " chair(s) clockwise.";
+                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + "clockwise.";
                                 break;
                             case 1: // move the duck to a different chair :OOOO
                                 uh = Random.Range(1, 6);
@@ -614,9 +614,9 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (uh == 3)
                                     stageText += "move the duck to the chair across from it.";
                                 else if (oh == 0)
-                                    stageText += "move the duck " + uh + " chair(s) counter-clockwise.";
+                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + "counter-clockwise.";
                                 else
-                                    stageText += "move the duck " + uh + " chair(s) clockwise.";
+                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + "clockwise.";
                                 break;
                             case 2: // fill a can with paint from another can! poggers!
                                 uh = Random.Range(0, 3);
@@ -633,14 +633,14 @@ public class duckKonundrumScript : MonoBehaviour
                                     if (oh == 0)
                                         stageText += "paint the seat of your chair with " + possibleColors[stinky] + " paint.";
                                     else
-                                        stageText += "paint the seat of the chair " + oh.ToString() + " chair(s) clockwise from your chair with " + possibleColors[stinky] + " paint.";
+                                        stageText += "paint the seat of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from your chair with " + possibleColors[stinky] + " paint.";
                                 }
                                 else
                                 {
                                     if (oh == 0)
                                         stageText += "paint the seat of the duck's chair with " + possibleColors[stinky] + " paint.";
                                     else
-                                        stageText += "paint the seat of the chair " + oh.ToString() + " chair(s) clockwise from the duck's chair with " + possibleColors[stinky] + " paint.";
+                                        stageText += "paint the seat of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from the duck's chair with " + possibleColors[stinky] + " paint.";
                                 }
                                 break;
                             case 4: // paint a bottom! woah!
@@ -652,19 +652,19 @@ public class duckKonundrumScript : MonoBehaviour
                                     if (oh == 0)
                                         stageText += "paint the bottom of your chair with " + possibleColors[stinky] + " paint.";
                                     else
-                                        stageText += "paint the bottom of the chair " + oh.ToString() + " chair(s) clockwise from your chair with " + possibleColors[stinky] + " paint.";
+                                        stageText += "paint the bottom of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from your chair with " + possibleColors[stinky] + " paint.";
                                 }
                                 else
                                 {
                                     if (oh == 0)
                                         stageText += "paint the bottom of the duck's chair with " + possibleColors[stinky] + " paint.";
                                     else
-                                        stageText += "paint the bottom of the chair " + oh.ToString() + " chair(s) clockwise from the duck's chair with " + possibleColors[stinky] + " paint.";
+                                        stageText += "paint the bottom of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from the duck's chair with " + possibleColors[stinky] + " paint.";
                                 }
                                 break;
                         }
 
-                        DebugMsg("The whoopee cushion is on the chair " + whoopeeCushionPos + " chair(s) clockwise from the armchair.");
+                        DebugMsg("The whoopee cushion is on the chair " + whoopeeCushionPos + " chair" + (whoopeeCushionPos == 1 ? "" : "s") + " clockwise from the armchair.");
                     }
                     else if (Random.Range(0, 2) == 0) // move the cushion
                     {
@@ -690,9 +690,9 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (uh == 3)
                                     stageText += "move to the chair across from you instead.";
                                 else if (oh == 0)
-                                    stageText += "move " + uh + " chair(s) counter-clockwise instead.";
+                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + " counter-clockwise instead.";
                                 else
-                                    stageText += "move " + uh + " chair(s) clockwise instead.";
+                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + " clockwise instead.";
                                 break;
                             case 1: // move the duck to a different chair :OOOO
                                 uh = Random.Range(1, 6);
@@ -700,9 +700,9 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (uh == 3)
                                     stageText += "move the duck to the chair across from it instead.";
                                 else if (oh == 0)
-                                    stageText += "move the duck " + uh + " chair(s) counter-clockwise instead.";
+                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + " counter-clockwise instead.";
                                 else
-                                    stageText += "move the duck " + uh + " chair(s) clockwise instead.";
+                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + " clockwise instead.";
                                 break;
                             case 2: // fill a can with paint from another can! poggers!
                                 uh = Random.Range(0, 3);
@@ -719,14 +719,14 @@ public class duckKonundrumScript : MonoBehaviour
                                     if (oh == 0)
                                         stageText += "paint the seat of your chair with " + possibleColors[stinky] + " paint instead.";
                                     else
-                                        stageText += "paint the seat of the chair " + oh.ToString() + " chair(s) clockwise from your chair with " + possibleColors[stinky] + " paint instead.";
+                                        stageText += "paint the seat of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from your chair with " + possibleColors[stinky] + " paint instead.";
                                 }
                                 else
                                 {
                                     if (oh == 0)
                                         stageText += "paint the seat of the duck's chair with " + possibleColors[stinky] + " paint instead.";
                                     else
-                                        stageText += "paint the seat of the chair " + oh.ToString() + " chair(s) clockwise from the duck's chair with " + possibleColors[stinky] + " paint instead.";
+                                        stageText += "paint the seat of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from the duck's chair with " + possibleColors[stinky] + " paint instead.";
                                 }
                                 break;
                             case 4: // paint a bottom! woah!
@@ -738,14 +738,14 @@ public class duckKonundrumScript : MonoBehaviour
                                     if (oh == 0)
                                         stageText += "paint the bottom of your chair with " + possibleColors[stinky] + " paint instead.";
                                     else
-                                        stageText += "paint the bottom of the chair " + oh.ToString() + " chair(s) clockwise from your chair with " + possibleColors[stinky] + " paint instead.";
+                                        stageText += "paint the bottom of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from your chair with " + possibleColors[stinky] + " paint instead.";
                                 }
                                 else
                                 {
                                     if (oh == 0)
                                         stageText += "paint the bottom of the duck's chair with " + possibleColors[stinky] + " paint instead.";
                                     else
-                                        stageText += "paint the bottom of the chair " + oh.ToString() + " chair(s) clockwise from the duck's chair with " + possibleColors[stinky] + " paint instead.";
+                                        stageText += "paint the bottom of the chair " + oh + " chair" + (oh == 1 ? "" : "s") + " clockwise from the duck's chair with " + possibleColors[stinky] + " paint instead.";
                                 }
                                 break;
                             case 5: // paint a body part with paint from a can! super epic!
@@ -755,7 +755,7 @@ public class duckKonundrumScript : MonoBehaviour
                                 break;
                         }
 
-                        DebugMsg("The whoopee cushion is on the chair " + whoopeeCushionPos + " chair(s) clockwise from the armchair.");
+                        DebugMsg("The whoopee cushion is on the chair " + whoopeeCushionPos + " chair" + (whoopeeCushionPos == 1 ? "" : "s") + " clockwise from the armchair.");
                     }
 
                     break;
@@ -801,9 +801,9 @@ public class duckKonundrumScript : MonoBehaviour
                             if (hokey == 3)
                                 stageText += "move to the chair across from you.";
                             else if (pokey == 0)
-                                stageText += "move " + hokey + " chair(s) counter-clockwise.";
+                                stageText += "move " + hokey + " chair" + (hokey == 1 ? "" : "s") + " counter-clockwise.";
                             else
-                                stageText += "move " + hokey + " chair(s) clockwise.";
+                                stageText += "move " + hokey + " chair" + (hokey == 1 ? "" : "s") + " clockwise.";
                             break;
                         case 1: // move the duck to a different chair :OOOO
                             hokey = Random.Range(1, 6);
@@ -811,9 +811,9 @@ public class duckKonundrumScript : MonoBehaviour
                             if (hokey == 3)
                                 stageText += "move the duck to the chair across from it.";
                             else if (pokey == 0)
-                                stageText += "move the duck " + hokey + " chair(s) counter-clockwise.";
+                                stageText += "move the duck " + hokey + " chair" + (hokey == 1 ? "" : "s") + " counter-clockwise.";
                             else
-                                stageText += "move the duck " + hokey + " chair(s) clockwise.";
+                                stageText += "move the duck " + hokey + " chair" + (hokey == 1 ? "" : "s") + " clockwise.";
                             break;
                         case 2: // fill a can with paint from another can! poggers!
                             hokey = Random.Range(0, 3);
@@ -830,14 +830,14 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (pokey == 0)
                                     stageText += "paint the seat of your chair with " + possibleColors[okeydokey] + " paint.";
                                 else
-                                    stageText += "paint the seat of the chair " + pokey.ToString() + " chair(s) clockwise from your chair with " + possibleColors[okeydokey] + " paint.";
+                                    stageText += "paint the seat of the chair " + pokey + " chair" + (pokey == 1 ? "" : "s") + " clockwise from your chair with " + possibleColors[okeydokey] + " paint.";
                             }
                             else
                             {
                                 if (pokey == 0)
                                     stageText += "paint the seat of the duck's chair with " + possibleColors[okeydokey] + " paint.";
                                 else
-                                    stageText += "paint the seat of the chair " + pokey.ToString() + " chair(s) clockwise from the duck's chair with " + possibleColors[okeydokey] + " paint.";
+                                    stageText += "paint the seat of the chair " + pokey + " chair" + (pokey == 1 ? "" : "s") + " clockwise from the duck's chair with " + possibleColors[okeydokey] + " paint.";
                             }
                             break;
                         case 4: // paint a bottom! woah!
@@ -849,14 +849,14 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (pokey == 0)
                                     stageText += "paint the bottom of your chair with " + possibleColors[okeydokey] + " paint.";
                                 else
-                                    stageText += "paint the bottom of the chair " + pokey.ToString() + " chair(s) clockwise from your chair with " + possibleColors[okeydokey] + " paint.";
+                                    stageText += "paint the bottom of the chair " + pokey + " chair" + (pokey == 1 ? "" : "s") + " clockwise from your chair with " + possibleColors[okeydokey] + " paint.";
                             }
                             else
                             {
                                 if (pokey == 0)
                                     stageText += "paint the bottom of the duck's chair with " + possibleColors[okeydokey] + " paint.";
                                 else
-                                    stageText += "paint the bottom of the chair " + pokey.ToString() + " chair(s) clockwise from the duck's chair with " + possibleColors[okeydokey] + " paint.";
+                                    stageText += "paint the bottom of the chair " + pokey + " chair" + (pokey == 1 ? "" : "s") + " clockwise from the duck's chair with " + possibleColors[okeydokey] + " paint.";
                             }
                             break;
                         case 5: // paint a body part with paint from a can! super epic!
@@ -894,7 +894,7 @@ public class duckKonundrumScript : MonoBehaviour
                                     currentPos = (currentPos + (hokey - 6) * -1) % 6;
                                 else
                                     currentPos = (currentPos + hokey) % 6;
-                                DebugMsg("The Hokey Pokey rule activated! You are now in the chair " + currentPos + " chair(s) clockwise from the armchair.");
+                                DebugMsg("The Hokey Pokey rule activated! You are now in the chair " + currentPos + " chair" + (currentPos == 1 ? "" : "s") + " clockwise from the armchair.");
                                 if (currentPos == whoopeeCushionPos)
                                     SitOnWhoopeeCushion();
                                 if (foreheadActivated && foreheadRule == 0)
@@ -908,7 +908,7 @@ public class duckKonundrumScript : MonoBehaviour
                                     duckPos = (duckPos + (hokey - 6) * -1) % 6;
                                 else
                                     duckPos = (duckPos + hokey) % 6;
-                                DebugMsg("The Hokey Pokey rule activated! The duck is now in the chair " + duckPos + " chair(s) clockwise from the armchair.");
+                                DebugMsg("The Hokey Pokey rule activated! The duck is now in the chair " + duckPos + "chair" + (duckPos == 1 ? "" : "s") + " clockwise from the armchair.");
                                 if (duckPos == whoopeeCushionPos)
                                     SitOnWhoopeeCushion();
                                 if (foreheadActivated && foreheadRule == 1)
@@ -930,12 +930,12 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (hokey == 0)
                                 {
                                     seatColors[(currentPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((currentPos + pokey) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((currentPos + pokey) % 6) + " chair" + ((currentPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 else
                                 {
                                     seatColors[(duckPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((duckPos + pokey) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((duckPos + pokey) % 6) + " chair" + ((duckPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 if (foreheadActivated && foreheadRule == 3)
                                 {
@@ -947,12 +947,12 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (hokey == 0)
                                 {
                                     bottomColors[(currentPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The bottom of the chair " + ((currentPos + pokey) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The bottom of the chair " + ((currentPos + pokey) % 6) + " chair" + ((currentPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 else
                                 {
                                     bottomColors[(duckPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The bottom of the chair " + ((duckPos + pokey) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The bottom of the chair " + ((duckPos + pokey) % 6) + " chair" + ((duckPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 if (foreheadActivated && foreheadRule == 3)
                                 {
@@ -1021,7 +1021,7 @@ public class duckKonundrumScript : MonoBehaviour
                     currentPos = (currentPos + uh) % 6;
                 if (currentPos == whoopeeCushionPos)
                     SitOnWhoopeeCushion();
-                DebugMsg("The whoopee cushion rule activated! You are now in the chair " + currentPos + " chair(s) clockwise from the armchair.");
+                DebugMsg("The whoopee cushion rule activated! You are now in the chair " + currentPos + " chair" + (currentPos == 1 ? "" : "s") + " clockwise from the armchair.");
                 if (foreheadActivated && foreheadRule == 0)
                 {
                     foreheadLs++;
@@ -1035,7 +1035,7 @@ public class duckKonundrumScript : MonoBehaviour
                     duckPos = (duckPos + uh) % 6;
                 if (duckPos == whoopeeCushionPos)
                     SitOnWhoopeeCushion();
-                DebugMsg("The whoopee cushion rule activated! The duck is now in the chair " + duckPos + " chair(s) clockwise from the armchair.");
+                DebugMsg("The whoopee cushion rule activated! The duck is now in the chair " + duckPos + " chair" + (duckPos == 1 ? "" : "s") + " clockwise from the armchair.");
                 if (foreheadActivated && foreheadRule == 1)
                 {
                     foreheadLs++;
@@ -1055,12 +1055,12 @@ public class duckKonundrumScript : MonoBehaviour
                 if (uh == 0)
                 {
                     seatColors[(currentPos + oh) % 6] = stinky;
-                    DebugMsg("The whoopee cushion rule activated! The seat of the chair " + ((currentPos + oh) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[stinky] + ".");
+                    DebugMsg("The whoopee cushion rule activated! The seat of the chair " + ((currentPos + oh) % 6) + " chair" + ((currentPos + oh) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[stinky] + ".");
                 }
                 else
                 {
                     seatColors[(duckPos + oh) % 6] = stinky;
-                    DebugMsg("The whoopee cushion rule activated! The seat of the chair " + ((duckPos + oh) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[stinky] + ".");
+                    DebugMsg("The whoopee cushion rule activated! The seat of the chair " + ((duckPos + oh) % 6) + " chair" + ((duckPos + oh) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[stinky] + ".");
                 }
                 if (foreheadActivated && foreheadRule == 3)
                 {
@@ -1072,12 +1072,12 @@ public class duckKonundrumScript : MonoBehaviour
                 if (uh == 0)
                 {
                     bottomColors[(currentPos + oh) % 6] = stinky;
-                    DebugMsg("The whoopee cushion rule activated! The bottom of the chair " + ((currentPos + oh) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[stinky] + ".");
+                    DebugMsg("The whoopee cushion rule activated! The bottom of the chair " + ((currentPos + oh) % 6) + " chair" + ((currentPos + oh) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[stinky] + ".");
                 }
                 else
                 {
                     bottomColors[(duckPos + oh) % 6] = stinky;
-                    DebugMsg("The whoopee cushion rule activated! The bottom of the chair " + ((duckPos + oh) % 6).ToString() + " chair(s) clockwise from the armchair is now " + possibleColors[stinky] + ".");
+                    DebugMsg("The whoopee cushion rule activated! The bottom of the chair " + ((duckPos + oh) % 6) + " chair" + ((duckPos + oh) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[stinky] + ".");
                 }
                 if (foreheadActivated && foreheadRule == 3)
                 {
@@ -1132,19 +1132,19 @@ public class duckKonundrumScript : MonoBehaviour
                                     if (uhhhhhhhhhhh == 0)
                                         numberString = "N (where N is the number written on the back of the armchair)";
                                     else
-                                        numberString = "N (where N is the number written on the back of the chair " + uhhhhhhhhhhh + " chair(s) clockwise from the armchair)";
+                                        numberString = "N (where N is the number written on the back of the chair " + uhhhhhhhhhhh + " chair" + (uhhhhhhhhhhh == 1 ? "" : "s") + " clockwise from the armchair)";
                                     break;
                                 case 1:
                                     if (currentPos == uhhhhhhhhhhh)
                                         numberString = "N (where N is the number written on the back of the chair you're on)";
                                     else
-                                        numberString = "N (where N is the number written on the back of the chair " + Mathf.Abs(currentPos - uhhhhhhhhhhh) + " chair(s) clockwise from you)";
+                                        numberString = "N (where N is the number written on the back of the chair " + Mathf.Abs(currentPos - uhhhhhhhhhhh) + " chair" + (Mathf.Abs(currentPos - uhhhhhhhhhhh) == 1 ? "" : "s") + " clockwise from you)";
                                     break;
                                 case 2:
                                     if (duckPos == uhhhhhhhhhhh)
                                         numberString = "N (where N is the number written on the back of the duck's chair)";
                                     else
-                                        numberString = "N (where N is the number written on the back of the chair " + Mathf.Abs(duckPos - uhhhhhhhhhhh) + " chair(s) clockwise from the duck's chair)";
+                                        numberString = "N (where N is the number written on the back of the chair " + Mathf.Abs(duckPos - uhhhhhhhhhhh) + " chair" + (Mathf.Abs(duckPos - uhhhhhhhhhhh) == 1 ? "" : "s") + " clockwise from the duck's chair)";
                                     break;
                                 case 3:
                                     if (backColors.Count(a => a.Equals(backColors[uhhhhhhhhhhh])) == 1)
@@ -1166,7 +1166,7 @@ public class duckKonundrumScript : MonoBehaviour
                     numberValue = Random.Range(1, 6); // if no painted seats, default to 1-5
                 else
                 {
-                    numberString = "N (where N is the number of chair(s) with paint on their seats)";
+                    numberString = "N (where N is the number of chairs with paint on their seats)";
                     return seatColors.Count(a => !a.Equals(0));
                 }
                 break;
@@ -1201,12 +1201,12 @@ public class duckKonundrumScript : MonoBehaviour
                     numberValue = Random.Range(1, 6);
                 else if (Random.Range(0, 2) == 0)
                 {
-                    numberString = "N (where N is the sum of all the numbers on the backs of chair(s))";
+                    numberString = "N (where N is the sum of all the numbers on the backs of chairs)";
                     return backNumbers.Sum();
                 }
                 else
                 {
-                    numberString = "N (where N is the digital root of all the numbers on the backs of chair(s))";
+                    numberString = "N (where N is the digital root of all the numbers on the backs of chairs)";
                     return backNumbers.Sum() % 9;
                 }
                 break;
@@ -1215,7 +1215,7 @@ public class duckKonundrumScript : MonoBehaviour
                     numberValue = Random.Range(1, 6); // if no painted seats, default to 1-5
                 else
                 {
-                    numberString = "N (where N is the number of chair(s) with paint on their bottoms)";
+                    numberString = "N (where N is the number of chairs with paint on their bottoms)";
                     return bottomColors.Count(a => !a.Equals(0));
                 }
                 break;
@@ -1273,11 +1273,11 @@ public class duckKonundrumScript : MonoBehaviour
                     seatString = "the chair opposite from your chair";
                 else if (Random.Range(0, 2) == 0)
                 {
-                    seatString = "the chair " + numberString + " chair(s) counter-clockwise from your chair";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " counter-clockwise from your chair";
                     number1 = (number1 % 6 - 6) * -1;
                 }
                 else
-                    seatString = "the chair " + numberString + " chair(s) clockwise from your chair";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " clockwise from your chair";
                 return (currentPos + number1) % 6;
             case 1: // X chair(s) clockwise from the duck's chair.
                 if (ignoredRule == 4 && ignoredRule == 1)
@@ -1290,11 +1290,11 @@ public class duckKonundrumScript : MonoBehaviour
                     seatString = "the chair opposite from the duck's chair";
                 else if (Random.Range(0, 2) == 0)
                 {
-                    seatString = "the chair " + numberString + " chair(s) counter-clockwise from the duck's chair";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " counter-clockwise from the duck's chair";
                     number1 = (number1 % 6 - 6) * -1;
                 }
                 else
-                    seatString = "the chair " + number1 + " chair(s) clockwise from the duck's chair";
+                    seatString = "the chair " + number1 + " chair" + (number1 == 1 ? "" : "s") + " clockwise from the duck's chair";
                 return (duckPos + number1) % 6;
             case 2: // the chair with a [color] seat. if there are multiple, use the first one clockwise from you/the duck.
                 if (seatColors.Count(a => a.Equals(0)) == 6 && ignoredRule != 0) // if all seats are unpainted, default to case 0.
@@ -1365,11 +1365,11 @@ public class duckKonundrumScript : MonoBehaviour
                     seatString = "the chair opposite from the armchair";
                 else if (Random.Range(0, 2) == 0)
                 {
-                    seatString = "the chair " + numberString + " chair(s) counter-clockwise from the armchair";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " counter-clockwise from the armchair";
                     number1 = (number1 % 6 - 6) * -1;
                 }
                 else
-                    seatString = "the chair " + numberString + " chair(s) clockwise from the armchair";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " clockwise from the armchair";
                 return number1;
             case 5: // the chair with the number N on the back
                 seatArray = new int[6] { 0, 1, 2, 3, 4, 5 }.Shuffle().ToArray();
@@ -1418,11 +1418,11 @@ public class duckKonundrumScript : MonoBehaviour
                     seatString = "the chair across from the whoopee cushion";
                 else if (Random.Range(0, 2) == 0)
                 {
-                    seatString = "the chair " + numberString + " chair(s) counter-clockwise from the whoopee cushion";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " counter-clockwise from the whoopee cushion";
                     number1 = (number1 % 6 - 6) * -1;
                 }
                 else
-                    seatString = "the chair " + numberString + " chair(s) clockwise from the whoopee cushion";
+                    seatString = "the chair " + numberString + " chair" + (numberString == "1" ? "" : "s") + " clockwise from the whoopee cushion";
                 return (whoopeeCushionPos + number1) % 6;
             default:
                 goto case 1; // should never be returned
@@ -1503,7 +1503,6 @@ public class duckKonundrumScript : MonoBehaviour
         numberValue = Random.Range(0, 8);
         while (numberValue == ignoredRule)
             numberValue = Random.Range(0, 8);
-        Debug.LogFormat("debug message (color). numbervalue = {0}.", numberValue);
 
         switch (numberValue)
         {
@@ -2039,7 +2038,7 @@ public class duckKonundrumScript : MonoBehaviour
             while (animationPlaying)
             {
                 yield return new WaitForSeconds(.1f);
-                btnTexts[2].text = "(" + queuedStages + " stage(s)";
+                btnTexts[2].text = "(" + queuedStages + " stage" + (queuedStages == 1 ? "" : "s");
                 btnTexts[3].text = "are queued.)";
             }
 
@@ -2051,7 +2050,7 @@ public class duckKonundrumScript : MonoBehaviour
         animationPlaying = true;
         displayedStage++;
         queuedStages--;
-        btnTexts[2].text = "(" + queuedStages + " stage(s)";
+        btnTexts[2].text = "(" + queuedStages + " stage" + (queuedStages == 1 ? "" : "s");
         btnTexts[3].text = "are queued.)";
         btnTexts[0].text = "Loading...";
         if (queuedStages == 0)
@@ -2206,7 +2205,7 @@ public class duckKonundrumScript : MonoBehaviour
         while (!solved)
         {
             int randomButton = Random.Range(0, 4);
-            if (screenText.text != "SYSTEM OVERLOAD...")
+            if (screenText.text != "SYSTEM\nOVERLOAD...")
                 yield return new WaitForSeconds(Random.Range(3 + (2 - questionNumber) * 4, 6 + (2 - questionNumber) * 4) * .1f);
             switch (Random.Range(0, 8))
             {
