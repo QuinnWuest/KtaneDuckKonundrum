@@ -32,7 +32,7 @@ public class duckKonundrumScript : MonoBehaviour
     private int currentStage = 0, queuedStages = 0, displayedStage = -1;
     private string stageText;
 
-    private bool animationPlaying = false, readyToStartSubmission = false, autosolveWeirdness = false, stopAutosolve = false;
+    private bool animationPlaying;
 
     private int currentPos, duckPos;
     private int chairMethod;
@@ -127,11 +127,12 @@ public class duckKonundrumScript : MonoBehaviour
                 return false;
             };
         }
-        Init();
+        StartCoroutine(Init());
     }
 
-    void Init()
+    IEnumerator Init()
     {
+        yield return null;
         if (ignoredModules == null)
             ignoredModules = GetComponent<KMBossModule>().GetIgnoredModules("Duck Konundrum", new string[] {
                 "14",
@@ -244,10 +245,7 @@ public class duckKonundrumScript : MonoBehaviour
         }
 
         else if (displayedStage + 1 == stageCount)
-        {
             StartCoroutine(PrepForSubmission());
-            readyToStartSubmission = false;
-        }
 
         else
         {
@@ -261,8 +259,6 @@ public class duckKonundrumScript : MonoBehaviour
             previousStep = randomStep;
             numberString = canString = colorString = "";
             placeholder = 0; // used for whenever it's needed
-
-            Debug.LogFormat("debug message (step). randomstep = {0}.", randomStep);
 
             switch (randomStep)
             {
@@ -972,7 +968,6 @@ public class duckKonundrumScript : MonoBehaviour
                                 break;
                         }
                     }
-                Debug.LogFormat("debug message (hokey pokey). hokey pokey is happening. step is {0}. part is {1}.", hokeyPokeyStep, hokeyPokeyPart);
             }
 
             StartCoroutine(DisplayStage(stageText));
@@ -1108,8 +1103,6 @@ public class duckKonundrumScript : MonoBehaviour
                                            // 11 = number of chair(s) with paint on their bottoms (why did i forget to implement this one), 12 = number of Ls on your forehead
         while (numberValue == ignoredRule1 || numberValue == ignoredRule2)
             numberValue = Random.Range(5, 13);
-
-        Debug.LogFormat("debug message (number). numbervalue = {0}.", numberValue);
 
         switch (numberValue)
         {
@@ -1259,7 +1252,6 @@ public class duckKonundrumScript : MonoBehaviour
 
         seatNumberValue = numberValue;
 
-        Debug.LogFormat("debug message (seat). numbervalue = {0}.", numberValue);
         switch (numberValue)
         {
             case 0: // X chair(s) clockwise from your chair.
@@ -1433,7 +1425,6 @@ public class duckKonundrumScript : MonoBehaviour
         numberValue = Random.Range(2, 6); // 0/1/2 = smallest/medium/largest, 3 = the only paint-filled/empty can, 4 = the only painted/unpainted can, 5 = the [color] watering can
         while (numberValue == ignoredRule)
             numberValue = Random.Range(2, 6);
-        Debug.LogFormat("debug message (can). numbervalue = {0}.", numberValue);
         switch (numberValue)
         {
             case 2:
@@ -1577,7 +1568,6 @@ public class duckKonundrumScript : MonoBehaviour
     int GenerateBodyPart()
     {
         numberValue = Random.Range(0, 3);
-        Debug.LogFormat("debug message (can). numbervalue = {0}.", numberValue);
         switch (numberValue)
         {
             case 1:
@@ -1656,10 +1646,7 @@ public class duckKonundrumScript : MonoBehaviour
         for (int i = 0; i < 4; i++)
             btnTexts[i].text = "";
         if (questionNumber > 2)
-        {
-            stopAutosolve = true;
             StartCoroutine(SolveAnimation());
-        }
         else
         {
             while (!validQuestionSubjects[questionSubjects[subjectIndex]])
@@ -2058,8 +2045,6 @@ public class duckKonundrumScript : MonoBehaviour
         DebugMsg("Displaying Stage " + displayedStage + ". It says:");
         DebugMsg("\"" + textToDisplay + "\"");
         DebugMsg("===============================================");
-        if (displayedStage >= stageCount)
-            readyToStartSubmission = true;
 
         var waitTime = 1f;
         var length = screenText.text.Length;
@@ -2085,21 +2070,22 @@ public class duckKonundrumScript : MonoBehaviour
     }
     IEnumerator PrepForSubmission()
     {
-        autosolveWeirdness = true;
         if (displayedStage >= stageCount)
             yield return null;
         readyForInput = true;
         while (animationPlaying || currentStage + 1 <= stageCount)
             yield return new WaitForSeconds(.1f);
-        autosolveWeirdness = false;
         animationPlaying = true;
         Audio.PlaySoundAtTransform("glitch" + Random.Range(1, 12).ToString(), Module.transform);
         btnTexts[0].text = btnTexts[1].text = btnTexts[2].text = btnTexts[3].text = "";
 
+        var waitTime = 1f;
+        var length = screenText.text.Length;
+
         while (screenText.text != "")
         {
             screenText.text = screenText.text.Substring(0, screenText.text.Length - 1);
-            yield return new WaitForSeconds(.01f);
+            yield return new WaitForSeconds(waitTime / length);
         }
 
         if (seatColors.Count(a => a.Equals(0)) < 6)
@@ -2125,8 +2111,7 @@ public class duckKonundrumScript : MonoBehaviour
         string asfawmroemgsfoifdgoijsfb = "";
         for (int i = 2; i < 12; i++)
             asfawmroemgsfoifdgoijsfb += validQuestionSubjects[i].ToString() + " ";
-        Debug.LogFormat("debug message. valid subjects: True True {0}", asfawmroemgsfoifdgoijsfb);
-        animationPlaying = true;
+        animationPlaying = false;
         GenerateQuestion();
         StartCoroutine(GlitchAnimations());
     }
@@ -2318,18 +2303,16 @@ public class duckKonundrumScript : MonoBehaviour
 
     IEnumerator TwitchHandleForcedSolve()
     {
-        if (!readyForInput)
+        while (!readyForInput || animationPlaying)
+            yield return true;
+        for (int i = questionNumber; i < 4; i++)
         {
-            while (!readyToStartSubmission) yield return true;
-            btnSelectables[Random.Range(0, 4)].OnInteract();
-        }
-        while (autosolveWeirdness) yield return true;
-        while (!stopAutosolve)
-        {
-            while (animationPlaying) yield return true;
+            while (animationPlaying)
+                yield return true;
             btnSelectables[correctAnswer].OnInteract();
         }
-        while (!solved) yield return true;
+        while (!solved)
+            yield return true;
     }
 
     private static readonly string _punctuation = ".,。、！!？?〉》」』｣)）]】〕〗〙〛}>)❩❫❭❯❱❳❵｝";
