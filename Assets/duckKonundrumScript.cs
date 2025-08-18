@@ -604,9 +604,9 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (uh == 3)
                                     stageText += "move to the chair across from you.";
                                 else if (oh == 0)
-                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + "counter-clockwise.";
+                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + " counter-clockwise.";
                                 else
-                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + "clockwise.";
+                                    stageText += "move " + uh + " chair" + (uh == 1 ? "" : "s") + " clockwise.";
                                 break;
                             case 1: // move the duck to a different chair :OOOO
                                 uh = Random.Range(1, 6);
@@ -614,9 +614,9 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (uh == 3)
                                     stageText += "move the duck to the chair across from it.";
                                 else if (oh == 0)
-                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + "counter-clockwise.";
+                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + " counter-clockwise.";
                                 else
-                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + "clockwise.";
+                                    stageText += "move the duck " + uh + " chair" + (uh == 1 ? "" : "s") + " clockwise.";
                                 break;
                             case 2: // fill a can with paint from another can! poggers!
                                 uh = Random.Range(0, 3);
