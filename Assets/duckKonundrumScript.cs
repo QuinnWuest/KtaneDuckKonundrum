@@ -476,8 +476,8 @@ public class duckKonundrumScript : MonoBehaviour
                     }
                     break;
                 case 11: // Paint a number on the back of a chair.
-                    stageText = "asdfsjld";
-                    while (stageText == "asdfsjld" || stageText.Length > 320) // make sure stage text does not go off screen
+                    stageText = "";
+                    while (stageText.Length == 0)
                     {
                         color1 = GeneratePaint(false);
                         seat1 = GenerateSeat();
@@ -1115,33 +1115,37 @@ public class duckKonundrumScript : MonoBehaviour
                 else
                 {
                     int[] shuffled = new int[6] { 0, 1, 2, 3, 4, 5 }.Shuffle().ToArray();
-                    foreach (int uhhhhhhhhhhh in shuffled)
+                    foreach (int ix in shuffled)
                     {
-                        if (backNumbers[uhhhhhhhhhhh] != 0)
+                        if (backNumbers[ix] != 0)
                         {
-                            switch (Random.Range(0, 4)) // 0 = ...chair(s) clockwise from the armchair // 1 = ...chair(s) clockwise from you // 2 = ...chair(s) clockwise from the duck // 3 = ...written in [color]
+                            switch (Random.Range(0, 4))
+                                // 0 = ...chair(s) clockwise from the armchair
+                                // 1 = ...chair(s) clockwise from you
+                                // 2 = ...chair(s) clockwise from the duck
+                                // 3 = ...written in [color]
                             {
                                 case 0:
-                                    if (uhhhhhhhhhhh == 0)
+                                    if (ix == 0)
                                         numberString = "N (where N is the number written on the back of the armchair)";
                                     else
-                                        numberString = "N (where N is the number written on the back of the chair " + uhhhhhhhhhhh + " chair" + (uhhhhhhhhhhh == 1 ? "" : "s") + " clockwise from the armchair)";
+                                        numberString = "N (where N is the number written on the back of the chair " + ix + " chair" + (ix == 1 ? "" : "s") + " clockwise from the armchair)";
                                     break;
                                 case 1:
-                                    if (currentPos == uhhhhhhhhhhh)
+                                    if (currentPos == ix)
                                         numberString = "N (where N is the number written on the back of the chair you're on)";
                                     else
-                                        numberString = "N (where N is the number written on the back of the chair " + Mathf.Abs(currentPos - uhhhhhhhhhhh) + " chair" + (Mathf.Abs(currentPos - uhhhhhhhhhhh) == 1 ? "" : "s") + " clockwise from you)";
+                                        numberString = "N (where N is the number written on the back of the chair " + ClockwiseDistance(currentPos, ix) + " chair" + (ClockwiseDistance(currentPos, ix) == 1 ? "" : "s") + " clockwise from you)";
                                     break;
                                 case 2:
-                                    if (duckPos == uhhhhhhhhhhh)
+                                    if (duckPos == ix)
                                         numberString = "N (where N is the number written on the back of the duck's chair)";
                                     else
-                                        numberString = "N (where N is the number written on the back of the chair " + Mathf.Abs(duckPos - uhhhhhhhhhhh) + " chair" + (Mathf.Abs(duckPos - uhhhhhhhhhhh) == 1 ? "" : "s") + " clockwise from the duck's chair)";
+                                        numberString = "N (where N is the number written on the back of the chair " + ClockwiseDistance(duckPos, ix) + " chair" + (ClockwiseDistance(duckPos, ix) == 1 ? "" : "s") + " clockwise from the duck's chair)";
                                     break;
                                 case 3:
-                                    if (backColors.Count(a => a.Equals(backColors[uhhhhhhhhhhh])) == 1)
-                                        numberString = "N (where N is the only number written on the back of a chair in " + possibleColors[backColors[uhhhhhhhhhhh]] + ") ";
+                                    if (backColors.Count(a => a.Equals(backColors[ix])) == 1)
+                                        numberString = "N (where N is the only number written on the back of a chair in " + possibleColors[backColors[ix]] + ") ";
                                     else
                                     {
                                         numberValue = Random.Range(1, 6);
@@ -1149,7 +1153,7 @@ public class duckKonundrumScript : MonoBehaviour
                                     }
                                     break;
                             }
-                            return backNumbers[uhhhhhhhhhhh];
+                            return backNumbers[ix];
                         }
                     }
                 }
@@ -2270,6 +2274,10 @@ public class duckKonundrumScript : MonoBehaviour
         yield return new WaitForSeconds(.1f);
     }
 
+    int ClockwiseDistance(int from, int to)
+    {
+        return (to - from + 6) % 6;
+    }
 
     void DebugMsg(string message)
     {
