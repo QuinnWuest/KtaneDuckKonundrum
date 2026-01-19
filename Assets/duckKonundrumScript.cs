@@ -78,11 +78,11 @@ public class duckKonundrumScript : MonoBehaviour
         "Harold", "Reginald", "Victor", "Bo", "Ty", "Ed", "Zoz", // names of the ducks and the people in the original Duck Konundrum
         "Coroges", "Dogslante", "Landod", "Amciag", "Tofnen", // names of the ducks in the third Duck Konundrum, D3: The Fellowship of the Duck
         "Teddy", "Amelia", "Sasha", "Enrique", "Oscar", "Cthulu", // names of the ducks in the fifth Duck Konundrum, The Amazing Juggling Troupe of Duckkon Undrum V (and also Cthulu)
-        "Dude", "Emerald", "Jordan", "Milton", "Pauletta", // names of the chefs in the sixty Duck Konundrum, The Duck Konundrum VI: Now with Way Way Way Way Way Too Much Pepper
+        "Dude", "Emerald", "Jordan", "Milton", "Pauletta", // names of the chefs in the sixth Duck Konundrum, The Duck Konundrum VI: Now with Way Way Way Way Way Too Much Pepper
         "Economist", "Linguist", "Chemist", "Al Capone", "Tartuffe", "Cookie Monster", "Blastoid", "Algernon", "Scotchy", // names of the puzzle solvers in the eighth Duck Konundrum, DK8: The Turducken Konundrum
-        "Bagels", "Grunkle", "Steven", "Harold", "Clam Chowder", "Quackers", "Duckworth", "Quedlington", "Billiam", "Crouch", "Craig", "Goosetav", "Drew", "Henry", "Glen", "Waz",
+        "Grunkle", "Steven", "Harold", "Clam Chowder", "Quackers", "Duckworth", "Quedlington", "Billiam", "Crouch", "Craig", "Goosetav", "Drew", "Henry", "Glen", "Waz",
         "Gorby", "Toodles", "Peabeater", "Xanderoth", "Mario", "Clorco", "Dicey", "Alex", "Duck Norris", "Jimothy", "Webster", "Dolan", "Jon", "JonJon", "Eric", "Cabebe", "Junior", "Doctor", "Duckra",
-        "Josh", "John Cena", "Username", "Obama", "Muck", "Weedeater", "Trollface", "Baln", "Blan", "Tom Brady", "Void", "Cooldoom", "Luna", "Millie", "Rose", "Flower", "Niels", "Matthew",
+        "Josh", "John Cena", "Username", "Obama", "Muck", "Weedeater", "Trollface", "Baln", "Blan", "Tom Brady", "Void", "Maddy", "Luna", "Millie", "Rose", "Flower", "Niels", "Matthew",
         "Phillip", "Bork", "Molasses", "Quack" }; // community-submitted names
     private static readonly string[] edgeworkStrings =
     {
@@ -207,13 +207,14 @@ public class duckKonundrumScript : MonoBehaviour
         edgeworkNumbers[13] = Bomb.GetSerialNumberLetters().Count();
         edgeworkNumbers[14] = Bomb.GetModuleIDs().Count();
 
+        screenText.text = "";
         if (stageCount <= 1)
         {
             DebugMsg("Cannot generate stages; autosolving module.");
             StartCoroutine("SolveAnimation");
+            yield break;
         }
 
-        screenText.text = "";
         StartCoroutine(PrepForStage(displayedStage));
         StartCoroutine(CheckForSolves());
     }
@@ -1120,10 +1121,10 @@ public class duckKonundrumScript : MonoBehaviour
                         if (backNumbers[ix] != 0)
                         {
                             switch (Random.Range(0, 4))
-                                // 0 = ...chair(s) clockwise from the armchair
-                                // 1 = ...chair(s) clockwise from you
-                                // 2 = ...chair(s) clockwise from the duck
-                                // 3 = ...written in [color]
+                            // 0 = ...chair(s) clockwise from the armchair
+                            // 1 = ...chair(s) clockwise from you
+                            // 2 = ...chair(s) clockwise from the duck
+                            // 3 = ...written in [color]
                             {
                                 case 0:
                                     if (ix == 0)
