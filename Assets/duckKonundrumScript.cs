@@ -927,12 +927,12 @@ public class duckKonundrumScript : MonoBehaviour
                                 if (hokey == 0)
                                 {
                                     seatColors[(currentPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((currentPos + pokey) % 6) + " chair" + ((currentPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((currentPos + pokey) % 6) + " chair" + ((currentPos + pokey) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 else
                                 {
                                     seatColors[(duckPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((duckPos + pokey) % 6) + " chair" + ((duckPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The seat of the chair " + ((duckPos + pokey) % 6) + " chair" + ((duckPos + pokey) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 if (foreheadActivated && foreheadRule == 3)
                                 {
@@ -949,7 +949,7 @@ public class duckKonundrumScript : MonoBehaviour
                                 else
                                 {
                                     bottomColors[(duckPos + pokey) % 6] = okeydokey;
-                                    DebugMsg("The Hokey Pokey rule activated! The bottom of the chair " + ((duckPos + pokey) % 6) + " chair" + ((duckPos + pokey) % 6) + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
+                                    DebugMsg("The Hokey Pokey rule activated! The bottom of the chair " + ((duckPos + pokey) % 6) + " chair" + ((duckPos + pokey) % 6 == 1 ? "" : "s") + " clockwise from the armchair is now " + possibleColors[okeydokey] + ".");
                                 }
                                 if (foreheadActivated && foreheadRule == 3)
                                 {
